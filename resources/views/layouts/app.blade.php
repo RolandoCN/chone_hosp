@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>SisVehi</title>
+    <title>Hospital Chone</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -88,9 +88,9 @@
             <!-- Logo -->
             <a href="/" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>S</b>Vehi</span>
+                <span class="logo-mini"><b>S</b>Hosp</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Sis</b>Vehi</span>
+                <span class="logo-lg"><b>Sis</b>Hosp</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -194,6 +194,8 @@
                                                     <i class="fa fa-circle-o"></i> {{($gestion->menu->descripcion)}}</a>
                                                 </li>
                                             @endif
+
+                                           
                                             
                                         <li>
                                             
@@ -508,9 +510,7 @@
             $('#lista_gest_'+url_actual).addClass('active menu-open')
         }
         
-        var SITEURL = "{{ url('/') }}";
-        alert(SITEURL)
-
+    
     </script>
     
 

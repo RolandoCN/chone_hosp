@@ -9,7 +9,7 @@
 
         
         $idperfil=auth()->user()->perfil->id_perfil;
-        $perfil=App\Models\Alimentacion\Perfil::where('id_perfil',$idperfil)->where('estado','A')->first();
+        $perfil=App\Models\Accesos\Perfil::where('id_perfil',$idperfil)->where('estado','A')->first();
 
         //si no tiene un perfil activo mandamos el menu vacio
         if(is_null($perfil)){
@@ -17,7 +17,7 @@
         }
         
         
-        $gestiones_listado= App\Models\Alimentacion\GestionMenu::select('id_gestion','estado')
+        $gestiones_listado= App\Models\Accesos\GestionMenu::select('id_gestion','estado')
         ->groupBy('id_gestion','estado')
         ->where('estado','A')
         ->get();
@@ -26,13 +26,13 @@
             
         $lista=[];
         foreach($gestiones_listado as $key=> $dataGestion){
-            $consultaAcceso=App\Models\Alimentacion\PerfilAcceso::with('menu')
+            $consultaAcceso=App\Models\Accesos\PerfilAcceso::with('menu')
             ->where('id_perfil',$idperfil)
             ->where('id_gestion', $dataGestion->id_gestion)
             ->get();
 
             if(sizeof($consultaAcceso)>0){
-                $nombreGestion=App\Models\Alimentacion\Gestion::where('id_gestion', $dataGestion->id_gestion)->first();
+                $nombreGestion=App\Models\Accesos\Gestion::where('id_gestion', $dataGestion->id_gestion)->first();
 
                 array_push($lista_modulo,["gestion"=>$nombreGestion->descripcion,"icono"=>$nombreGestion->icono, "rutas"=>$consultaAcceso]);
             }

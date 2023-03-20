@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
     public function perfil(){
-        return $this->belongsTo('App\Models\Alimentacion\UsuarioPerfil', 'id', 'id_usuario')
+        return $this->belongsTo('App\Models\Accesos\UsuarioPerfil', 'id', 'id_usuario')
         ->with('nombre_perfil');
     }
 

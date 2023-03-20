@@ -23,7 +23,7 @@ class ValidaRutaPerfil
         }
 
         $idperfil=auth()->user()->perfil->id_perfil;
-        $perfil=\App\Models\Alimentacion\Perfil::where('id_perfil',$idperfil)
+        $perfil=\App\Models\Accesos\Perfil::where('id_perfil',$idperfil)
         ->where('estado','A')->first();
 
         //si no tiene un perfil activo mandamos el menu vacio
@@ -45,13 +45,13 @@ class ValidaRutaPerfil
         $rutaLlamada = \Request::route()->uri;
         
         #verificamos acceso
-        $consultaAcceso=\App\Models\Alimentacion\PerfilAcceso::with('menu')
+        $consultaAcceso=\App\Models\Accesos\PerfilAcceso::with('menu')
         ->where('id_perfil',$idperfil)
         // ->where('id_gestion', $dataGestion->id_gestion)
         ->get();
 
         foreach($consultaAcceso as $data){
-            $verificaRuta=\App\Models\Alimentacion\Menu::where('id_menu',$data->id_menu)
+            $verificaRuta=\App\Models\Accesos\Menu::where('id_menu',$data->id_menu)
             ->where('url', '/'.$rutaLlamada)
             ->where('estado', 'A')
             ->first();

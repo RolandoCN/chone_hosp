@@ -1,18 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Alimentacion\GestionController;
-use App\Http\Controllers\Alimentacion\MenuController;
-use App\Http\Controllers\Alimentacion\GestionMenuController;
-use App\Http\Controllers\Alimentacion\PersonaController;
-use App\Http\Controllers\Alimentacion\PerfilController;
-use App\Http\Controllers\Alimentacion\UsuarioController;
-use App\Http\Controllers\Alimentacion\TurnoController;
-use App\Http\Controllers\Alimentacion\HorarioAlimentosController;
-use App\Http\Controllers\Alimentacion\ListadoTurnoController;
-use App\Http\Controllers\Alimentacion\VerificaTurnoController;
-use App\Http\Controllers\Alimentacion\ReporteController;
+use App\Http\Controllers\Accesos\GestionController;
+use App\Http\Controllers\Accesos\MenuController;
+use App\Http\Controllers\Accesos\GestionMenuController;
+use App\Http\Controllers\Accesos\PersonaController;
+use App\Http\Controllers\Accesos\PerfilController;
+use App\Http\Controllers\Accesos\UsuarioController;
 
+use App\Http\Controllers\Bodega\IngresoBodegaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,55 +89,20 @@ Route::get('/eliminar-usuario/{id}', [UsuarioController::class, 'eliminar']);
 Route::post('/cambiar-clave', [UsuarioController::class, 'cambiarClave']);
 Route::get('/resetear-password/{id}', [UsuarioController::class, 'resetearPassword']);
 
-//GESTION-TURNOS
-Route::get('/consulta-horario', [TurnoController::class, 'index']);
-Route::get('/buscar-persona', [TurnoController::class, 'buscarPersona']);
-Route::get('/info-persona/{id}', [TurnoController::class, 'infoPersona']);
 
-Route::get('fullcalender/{id}', [TurnoController::class, 'mostrar']);
-Route::get('fullcalender_/{id}', [TurnoController::class, 'mostrarAux']);
-Route::post('actualizar-turno-comida', [TurnoController::class, 'actualizarTurnoComida']);
-Route::post('eliminar-turno-comida', [TurnoController::class, 'eliminarTurnoComida']);
-Route::post('/asignar-turno', [TurnoController::class, 'asignar']);
+//BODEGA-INGRESO
+Route::get('/ingreso-bodega', [IngresoBodegaController::class, 'index']);
+Route::get('/buscar-producto', [IngresoBodegaController::class, 'buscarProducto']);
+Route::get('/buscar-proveedor', [IngresoBodegaController::class, 'buscarProveedor']);
+Route::get('/info-producto/{id}', [IngresoBodegaController::class, 'infoProducto']);
+Route::post('/guarda-ingreso-bodega', [IngresoBodegaController::class, 'guardaIngreso']);
 
 
-//GESTION-HORARIO ALIMENTOS
-Route::get('/horario-alimentos', [HorarioAlimentosController::class, 'index']);
-Route::get('/listado-horario-alimentos', [HorarioAlimentosController::class, 'listar']);
-Route::post('/guardar-horario', [HorarioAlimentosController::class, 'guardar']);
-Route::get('/editar-horario/{id}', [HorarioAlimentosController::class, 'editar']);
-Route::put('/actualizar-horario/{id}', [HorarioAlimentosController::class, 'actualizar']);
-Route::get('/eliminar-horario/{id}', [HorarioAlimentosController::class, 'eliminar']);
-Route::get('/horario-alimentos/{id}', [HorarioAlimentosController::class, 'alimentosHorario']);
-Route::get('/alimento-por-horario/{alimento}/{tipo}/{horario}', [HorarioAlimentosController::class, 'mantenimientoAlimentoHorario']);
-
-
-//GESTION APROBACION DE TURNOS
-Route::get('/listado-turno', [ListadoTurnoController::class, 'index']);
-Route::get('/turno-fecha/{fecha}/{alim}', [ListadoTurnoController::class, 'turnosFecha']);
-Route::post('/aprobar-turno', [ListadoTurnoController::class, 'aprobacionTurno']);
-
-
-//TURNOS APROBADOS
-
-Route::get('/turnos-aprobados', [ListadoTurnoController::class, 'vistaAprobado']);
-Route::get('/turno-fecha-aprob/{fecha}/{alim}', [ListadoTurnoController::class, 'comidasAprobadas']);
-Route::post('/descargar-aprobacion', [ListadoTurnoController::class, 'descargarAprobacionFechaInd']);
-Route::get('/descargar/{fecha}/{alim}', [ListadoTurnoController::class, 'descargar']);
-Route::get('/descargar-reporte/{nombre}', [ListadoTurnoController::class, 'descargarPdf']);
-
-//VERIFICACION DE ALIMENTOS FUNCIONARIO
-
-Route::get('/verificar-alimento', [VerificaTurnoController::class, 'vistaVerifica']);
-Route::post('/valida-comida-empleado', [VerificaTurnoController::class, 'validarComida']);
-
-
-//REPORTES
-
-Route::get('/informe-por-usuario', [ReporteController::class, 'informeUsuario']);
-Route::get('/alimento-servido-indiv/{f_ini}/{f_fin}/{usuario}', [ReporteController::class, 'alimentoServidoInd']);
-Route::post('/reporte-individual', [ReporteController::class, 'descargarAprobacionFechaInd']);
-Route::get('/test/{f_ini}/{f_fin}/{usuario}', [ReporteController::class, 'testReporte']);
+Route::get('/listado-gestion-menu', [IngresoBodegaController::class, 'listar']);
+Route::post('/guardar-gestion-menu', [IngresoBodegaController::class, 'guardar']);
+Route::get('/editar-gestion-menu/{id}', [IngresoBodegaController::class, 'editar']);
+Route::put('/actualizar-gestion-menu/{id}', [IngresoBodegaController::class, 'actualizar']);
+Route::get('/eliminar-gestion-menu/{id}', [IngresoBodegaController::class, 'eliminar']);
 
 
 
